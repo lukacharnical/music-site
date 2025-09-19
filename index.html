@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulaire</title>
+  <title>Formulaire sans serveur</title>
 </head>
 <body>
   <h1>Formulaire</h1>
-  <form action="save.php" method="post">
+  <form id="formulaire">
     <label>Nom :</label><br>
     <input type="text" name="nom" required><br><br>
 
@@ -17,7 +17,37 @@
     <label>Message :</label><br>
     <textarea name="message" rows="5" cols="30" required></textarea><br><br>
 
-    <button type="submit">Envoyer</button>
+    <button type="submit">Enregistrer</button>
   </form>
+
+  <script>
+    const form = document.getElementById('formulaire');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le formulaire de s'envoyer
+
+      // Récupère les valeurs
+      const nom = form.nom.value;
+      const email = form.email.value;
+      const message = form.message.value;
+
+      // Crée le contenu du fichier texte
+      const data = `Nom: ${nom}\nEmail: ${email}\nMessage: ${message}\n---\n`;
+
+      // Crée un Blob et un lien de téléchargement
+      const blob = new Blob([data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'donnees.txt';
+      a.click();
+
+      URL.revokeObjectURL(url); // Nettoyage
+
+      alert('Vos données ont été enregistrées dans un fichier texte !');
+      form.reset();
+    });
+  </script>
 </body>
 </html>
