@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire</title>
+</head>
+<body>
+  <h1>Formulaire</h1>
+  <form action="save.php" method="post">
+    <label>Nom :</label><br>
+    <input type="text" name="nom" required><br><br>
+
+    <label>Email :</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Message :</label><br>
+    <textarea name="message" rows="5" cols="30" required></textarea><br><br>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</body>
+</html>
